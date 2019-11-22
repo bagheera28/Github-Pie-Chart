@@ -1,44 +1,27 @@
-import urllib.request
-import collections
+from collections import OrderedDict
 import json
 import matplotlib.pyplot as plt
+import github3
 
-username = "Educorreia932"
+token_file = "token.txt"
 repositories = []
 languages = {}
 
-url = "https://api.github.com/users/" + username + "/repos"
+with open(token_file) as f:
+        my_token = f.read()
 
 #Get repository list
-request = urllib.request.Request(url, headers = {'Accept': 'application/vnd.github.v3+json'})
-response = urllib.request.urlopen(request)
-content = response.read().decode('utf-8')
+gh = github3.login(token = my_token)
 
-false = False
-true = True
-null = None
-
-temp = eval(content)
-
-#Get urls to each repositories languages page
-for i in range(len(temp)):
-    repositories.append(temp[i]["languages_url"])
-    
-for repo_url in repositories:
-    request = urllib.request.Request(repo_url)
-    response = urllib.request.urlopen(request)
-    content = response.read().decode('utf-8')
-    
-    temp = eval(content)
-    
-    for key in temp:
-        if key not in languages:
-            languages[key] = temp[key]
+for repo in gh.repositories(type='owner'):
+    for l in repo.languages():
+        if l[0] not in languages:
+            languages[l[0]] = l[1]
             
         else:
-            languages[key] += temp[key]
-    
-languages = dict(collections.OrderedDict(sorted(languages.items())))
+            languages[l[0]] += l[1]
+
+languages = dict(OrderedDict(sorted(languages.items())))
 
 #Retrieve languages color
 colors = []
