@@ -2,5 +2,5 @@
 
 ## Output example:
 
-Generated at 22/11/2019 11:00
+Generated at 22/11/2019 10:58
 ![Example](https://raw.githubusercontent.com/Educorreia932/Github-Pie-Chart/master/Figure.png)
