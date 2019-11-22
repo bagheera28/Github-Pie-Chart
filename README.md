@@ -1,4 +1,4 @@
 # Github Pie Chart
 
 ## Output example:
-![Example](https://i.imgur.com/rcG5SvK.png)
+![Example](https://raw.githubusercontent.com/Educorreia932/Github-Pie-Chart/master/Figure.png)
