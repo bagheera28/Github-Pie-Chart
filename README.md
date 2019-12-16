@@ -2,7 +2,7 @@
 
 ## Usage
 
-You create a file named "token.txt" including your personal generated token and execute the Python script.
+You create a file named `token.txt` including your personal generated token and execute the Python script.
 
 ## Libraries Used
 
