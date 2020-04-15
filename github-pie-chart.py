@@ -7,12 +7,14 @@ token_file = "token.txt"
 repositories = []
 languages = {}
 
+# Read token
 with open(token_file) as f:
-        my_token = f.read()
+    my_token = f.read()
 
-#Get repository list
+# Get repository list
 gh = github3.login(token = my_token)
 
+# Iterate over repositories
 for repo in gh.repositories(type='owner'):
     for l in repo.languages():
         if l[0] not in languages:
@@ -23,16 +25,19 @@ for repo in gh.repositories(type='owner'):
 
 languages = dict(OrderedDict(sorted(languages.items())))
 
-#Retrieve languages color
+# Retrieve languages color
 colors = []
 
 with open("colors.json") as json_file:
     data = json.load(json_file)
     
-    for language in data:
-        if language in languages:
-            colors.append(data[language]["color"])          
-    
+    for language in languages:
+        if language in data:
+            colors.append(data[language]["color"])    
+            
+        else:
+            colors.append("#CCCCCC")          
+        
 #Plot
 labels = []
 sizes = []
